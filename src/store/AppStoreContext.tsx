@@ -61,6 +61,7 @@ type Action =
         paymentMethod: PaymentMethod;
         notes?: string;
         useWallet?: boolean;
+        orderId?: string;
       };
       callback?: (orderId: string) => void;
     }
@@ -107,19 +108,23 @@ type Action =
   | { type: 'SET_ADMIN_AUTH'; payload: boolean };
 
 function getInitialState(): AppState {
+  let adminAuth = false;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object' && parsed.isAdminLoggedIn !== undefined) {
+        adminAuth = Boolean(parsed.isAdminLoggedIn);
+      }
       if (
-        Array.isArray(parsed.products) &&
-        Array.isArray(parsed.categories) &&
-        Array.isArray(parsed.customers) &&
-        Array.isArray(parsed.orders)
+        Array.isArray(parsed?.products) &&
+        Array.isArray(parsed?.categories) &&
+        Array.isArray(parsed?.customers) &&
+        Array.isArray(parsed?.orders)
       ) {
         return {
           ...parsed,
-          isAdminLoggedIn: parsed.isAdminLoggedIn ?? true, // default admin session for demo ease
+          isAdminLoggedIn: adminAuth,
           appliedCoupon: parsed.appliedCoupon ?? null,
           selectedDeliverySlot: parsed.selectedDeliverySlot ?? 'Morning (6 AM - 9 AM)',
         };
@@ -142,7 +147,7 @@ function getInitialState(): AppState {
     walletTransactions: initialWalletTransactions,
     referrals: initialReferrals,
     appliedCoupon: 'ANNA10',
-    isAdminLoggedIn: true,
+    isAdminLoggedIn: adminAuth,
     selectedDeliverySlot: 'Morning (6 AM - 9 AM)',
   };
 }
@@ -167,7 +172,7 @@ function appReducer(state: AppState, action: Action): AppState {
         walletTransactions: initialWalletTransactions,
         referrals: initialReferrals,
         appliedCoupon: 'ANNA10',
-        isAdminLoggedIn: true,
+        isAdminLoggedIn: state.isAdminLoggedIn,
         selectedDeliverySlot: 'Morning (6 AM - 9 AM)',
       };
     }
@@ -288,7 +293,7 @@ function appReducer(state: AppState, action: Action): AppState {
       const paymentStatus: PaymentStatus =
         paymentMethod === 'cod' ? 'Pending (COD)' : 'Paid (simulated)';
 
-      const newOrderId = generateId('ANN');
+      const newOrderId = action.payload.orderId || generateId('ANN');
       const now = new Date().toISOString();
 
       const newOrder: Order = {
@@ -844,15 +849,12 @@ export const AppStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     notes?: string,
     useWallet?: boolean
   ): string => {
-    let createdId = '';
+    const orderId = generateId('ANN');
     dispatch({
       type: 'PLACE_ORDER',
-      payload: { deliveryAddress, paymentMethod, notes, useWallet },
-      callback: (id) => {
-        createdId = id;
-      },
+      payload: { deliveryAddress, paymentMethod, notes, useWallet, orderId },
     });
-    return createdId;
+    return orderId;
   };
 
   const updateOrderStatus = (orderId: string, status: OrderStatus, note?: string) => {

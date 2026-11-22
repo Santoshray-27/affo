@@ -1,0 +1,8 @@
+# Robots.txt for Annapurna Farm Fresh & Organics
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+
+Sitemap: https://annapurna.demo/sitemap.xml

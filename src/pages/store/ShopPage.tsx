@@ -296,7 +296,7 @@ export const ShopPage: React.FC = () => {
         </aside>
 
         {/* Right Column: Toolbar + Product Grid */}
-        <main className="md:col-span-9 lg:col-span-9 space-y-6">
+        <div className="md:col-span-9 lg:col-span-9 space-y-6">
           {/* Toolbar: Sort + View Switcher (Grid 3, Grid 4, List) */}
           <div className="flex items-center justify-between gap-4 pb-4 border-b border-line">
             <div className="flex items-center gap-2">
@@ -418,7 +418,7 @@ export const ShopPage: React.FC = () => {
               })}
             </div>
           )}
-        </main>
+        </div>
       </div>
 
       {/* Mobile Filters Drawer */}

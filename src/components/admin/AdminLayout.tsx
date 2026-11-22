@@ -90,7 +90,7 @@ export const AdminLayout: React.FC = () => {
             title={getPageTitle(location.pathname)}
           />
 
-          <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto">
+          <main id="main-content" tabIndex={-1} className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto focus:outline-none">
             <PageTransition>
               <Outlet />
             </PageTransition>

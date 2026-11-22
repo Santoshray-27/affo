@@ -34,13 +34,19 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             id={selectId}
             ref={ref}
             className={cn(
-              'w-full bg-surface text-ink rounded-[10px] border border-border px-4 py-2.5 text-sm appearance-none pr-10 transition-colors duration-150',
+              'w-full bg-white text-ink rounded-[10px] border border-line px-4 py-2.5 text-sm appearance-none pr-10 transition-colors duration-150',
               'focus:outline-none focus:border-forest focus:ring-1 focus:ring-forest cursor-pointer h-12 min-h-[48px]',
               error && 'border-red focus:border-red',
               className
             )}
             {...props}
-          />
+          >
+            {options.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
           <div className="absolute right-3.5 text-muted pointer-events-none flex items-center">
             <ChevronDown className="w-4 h-4" />
           </div>

@@ -44,21 +44,23 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => 
   ];
 
   return (
-    <aside className="w-[240px] bg-forest-deep text-[#DDE6D6] h-full flex flex-col justify-between shrink-0 select-none border-r border-[#144723]">
+    <aside className="w-[240px] bg-forest-deep text-[#C9D8C6] h-full flex flex-col justify-between shrink-0 select-none border-r border-[#144723]">
       <div>
         {/* Admin Header with Brand Logo */}
         <div className="h-16 px-5 flex items-center justify-between border-b border-[#144723]">
           <Link to="/admin" className="flex items-center gap-2.5">
-            <img
-              src="/brand/logo-simple.png"
-              alt="Annapurna"
-              className="h-7 w-auto brightness-110"
-            />
+            <div className="bg-white px-2 py-1 rounded-[6px]">
+              <img
+                src="/brand/logo-full.png"
+                alt="Annapurna"
+                className="h-5 w-auto object-contain"
+              />
+            </div>
             <div className="flex items-baseline gap-1.5">
               <span className="font-heading font-normal text-white text-base tracking-tight">
                 अन्नपूर्णा
               </span>
-              <span className="text-[11px] font-mono text-lime uppercase tracking-wider font-medium">
+              <span className="text-[11px] font-mono text-lime uppercase tracking-wider font-semibold">
                 Owner
               </span>
             </div>
@@ -67,7 +69,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => 
           {onCloseMobile && (
             <button
               onClick={onCloseMobile}
-              className="lg:hidden p-1.5 rounded text-[#DDE6D6]/70 hover:text-white hover:bg-white/10"
+              className="lg:hidden p-1.5 rounded text-[#C9D8C6] hover:text-white hover:bg-white/10"
               aria-label="Close sidebar"
             >
               <X className="w-4 h-4" />
@@ -89,8 +91,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => 
                   cn(
                     'relative flex items-center justify-between h-9 px-3 rounded-[8px] text-[13px] font-normal transition-colors group',
                     isActive
-                      ? 'bg-[#C6E08D]/12 text-white font-medium before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[3px] before:rounded-r before:bg-lime'
-                      : 'text-[#DDE6D6]/80 hover:bg-white/5 hover:text-white'
+                      ? 'bg-[#C6E08D]/15 text-[#FAFAF3] font-medium before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[3px] before:rounded-r before:bg-lime'
+                      : 'text-[#C9D8C6] hover:bg-white/5 hover:text-white'
                   )
                 }
               >
@@ -100,7 +102,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => 
                       <Icon
                         className={cn(
                           'w-4 h-4 stroke-[1.75]',
-                          isActive ? 'text-lime' : 'text-[#DDE6D6]/70 group-hover:text-white'
+                          isActive ? 'text-lime' : 'text-[#C9D8C6] group-hover:text-white'
                         )}
                       />
                       <span>{item.label}</span>
@@ -130,12 +132,12 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => 
       <div className="p-3 border-t border-[#144723] space-y-2">
         <Link
           to="/"
-          className="w-full flex items-center justify-between h-9 px-3 rounded-[8px] text-[12px] text-[#DDE6D6]/80 hover:text-white hover:bg-white/5 transition-colors font-mono group"
+          className="w-full flex items-center justify-between h-9 px-3 rounded-[8px] text-[12px] text-[#C9D8C6] hover:text-white hover:bg-white/5 transition-colors font-mono group"
         >
           <span>View Storefront</span>
-          <ArrowUpRight className="w-3.5 h-3.5 text-[#DDE6D6]/60 group-hover:text-lime" />
+          <ArrowUpRight className="w-3.5 h-3.5 text-[#C9D8C6] group-hover:text-lime" />
         </Link>
-        <p className="text-[10px] text-[#DDE6D6]/40 text-center font-mono">
+        <p className="text-[10px] text-[#C9D8C6]/80 text-center font-mono">
           Annapurna v1.0
         </p>
       </div>

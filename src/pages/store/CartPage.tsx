@@ -313,7 +313,7 @@ export const CartPage: React.FC = () => {
                             value={couponInput}
                             onChange={(e) => setCouponInput(e.target.value)}
                             placeholder="e.g. ANNA10"
-                            className="flex-1 bg-cream rounded-[8px] border border-line px-3 py-1.5 text-xs uppercase font-mono tracking-wider focus:outline-none focus:border-forest"
+                            className="flex-1 bg-white rounded-[8px] border border-line px-3 py-1.5 text-xs uppercase font-mono tracking-wider focus:outline-none focus:border-forest text-ink"
                           />
                           <Button type="submit" variant="secondary" size="sm">
                             Apply

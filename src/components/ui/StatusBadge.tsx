@@ -9,64 +9,63 @@ export interface StatusBadgeProps {
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'sm', className }) => {
-  let colorStyle = 'bg-mint text-primary-dark border-mint-dark';
+  let colorStyle = 'bg-[#EAF4E4] text-[#14612A] border-[#CDE5C2]';
 
   switch (status) {
     // Order Statuses
     case 'Pending':
-      colorStyle = 'bg-marigold-light text-marigold-dark border-marigold/30';
+      colorStyle = 'bg-[#FFF3D6] text-[#8A5A00] border-[#F2DEAA]';
       break;
     case 'Confirmed':
-      colorStyle = 'bg-blue-50 text-blue-700 border-blue-200';
-      break;
     case 'Processing':
-      colorStyle = 'bg-purple-50 text-purple-700 border-purple-200';
+      colorStyle = 'bg-[#EAF4E4] text-[#14612A] border-[#CDE5C2]';
       break;
     case 'Out for Delivery':
-      colorStyle = 'bg-lime/20 text-primary-dark border-lime/50 font-bold';
+      colorStyle = 'bg-[#E3F0FF] text-[#1B4F8F] border-[#BDDCFF] font-medium';
       break;
     case 'Delivered':
-      colorStyle = 'bg-emerald-50 text-emerald-800 border-emerald-300';
+      colorStyle = 'bg-[#DFF3E4] text-[#14612A] border-[#BDE5C7]';
       break;
     case 'Cancelled':
-      colorStyle = 'bg-brand-red-light text-brand-red border-brand-red/30';
+      colorStyle = 'bg-[#FCE4E4] text-[#B01F1F] border-[#F5BDBD]';
       break;
 
     // Stock Statuses
     case 'In Stock':
-      colorStyle = 'bg-mint text-primary-dark border-leaf/30';
+      colorStyle = 'bg-[#EAF4E4] text-[#14612A] border-[#CDE5C2]';
       break;
     case 'Low Stock':
-      colorStyle = 'bg-marigold-light text-marigold-dark border-marigold/40 font-semibold';
+      colorStyle = 'bg-[#FFF3D6] text-[#8A5A00] border-[#F2DEAA] font-medium';
       break;
     case 'Out of Stock':
-      colorStyle = 'bg-red-50 text-brand-red border-red-200 font-semibold';
+      colorStyle = 'bg-[#FCE4E4] text-[#B01F1F] border-[#F5BDBD] font-medium';
       break;
 
     // Active/Inactive
     case 'Active':
-      colorStyle = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      colorStyle = 'bg-[#EAF4E4] text-[#14612A] border-[#CDE5C2]';
       break;
     case 'Inactive':
-      colorStyle = 'bg-stone-100 text-stone-600 border-stone-200';
+      colorStyle = 'bg-[#F4F4F0] text-[#5B6A5F] border-[#DDE6D6]';
       break;
 
     // Payment statuses
     case 'Paid (simulated)':
-      colorStyle = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+    case 'Paid':
+      colorStyle = 'bg-[#EAF4E4] text-[#14612A] border-[#CDE5C2]';
       break;
     case 'Pending (COD)':
-      colorStyle = 'bg-amber-50 text-amber-800 border-amber-300';
+      colorStyle = 'bg-[#FFF3D6] text-[#8A5A00] border-[#F2DEAA]';
       break;
     case 'Refunded':
-      colorStyle = 'bg-blue-50 text-blue-700 border-blue-200';
+      colorStyle = 'bg-[#E3F0FF] text-[#1B4F8F] border-[#BDDCFF]';
       break;
     case 'Failed':
-      colorStyle = 'bg-rose-50 text-rose-700 border-rose-200';
+      colorStyle = 'bg-[#FCE4E4] text-[#B01F1F] border-[#F5BDBD]';
       break;
 
     default:
-      colorStyle = 'bg-mint text-primary-dark border-mint-dark';
+      colorStyle = 'bg-[#EAF4E4] text-[#14612A] border-[#CDE5C2]';
   }
 
   const sizeClasses = {
@@ -88,4 +87,3 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'sm', c
     </span>
   );
 };
-

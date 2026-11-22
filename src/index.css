@@ -3,27 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --forest: #14612A;
-    --forest-deep: #0B3D1A;
-    --leaf: #4FA52A;
-    --lime: #A6CE39;
-    --red: #D62828;
-    --cream: #FAFAF3;
-    --mint: #EAF4E4;
-    --ink: #1F2A22;
-    --muted: #6B7A6F;
-    --line: #DDE6D6;
-
-    /* Legacy mapping */
-    --primary: #14612A;
-    --primary-dark: #0B3D1A;
-    --brand-red: #D62828;
-    --marigold: #F5A524;
-    --app-text: #1F2A22;
-    --border: #DDE6D6;
-  }
-
   body {
     background-color: #FAFAF3;
     color: #1F2A22;
@@ -51,18 +30,6 @@
   }
 }
 
-/* Pause marquee on hover */
-.pause-on-hover:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none !important;
-    transform: none !important;
-  }
-}
-
 /* Custom Hide Scrollbar Utility */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -75,4 +42,9 @@
 /* Mobile Safe Bottom Padding */
 .safe-bottom {
   padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Scroll margin for sticky header anchor links */
+section[id] {
+  scroll-margin-top: 88px;
 }

@@ -240,7 +240,11 @@ export const AdminAnalyticsPage: React.FC = () => {
                     fontFamily: 'monospace',
                   }}
                 />
-                <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', paddingTop: '10px', fontFamily: 'monospace' }} />
+                <Legend
+                  iconType="circle"
+                  formatter={(value) => <span style={{ color: '#1F2A22' }}>{value}</span>}
+                  wrapperStyle={{ fontSize: '11px', paddingTop: '10px', fontFamily: 'monospace' }}
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>

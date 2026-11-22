@@ -1,0 +1,174 @@
+:root {
+  --forest: #14612A;
+  --forest-deep: #0B3D1A;
+  --leaf: #4FA52A;
+  --lime: #A6CE39;
+  --red: #D62828;
+  --red-dark: #B01F1F;
+  --marigold: #F5A524;
+  --cream: #FAFAF3;
+  --mint: #EAF4E4;
+  --white: #FFFFFF;
+  --ink: #1F2A22;
+  --muted: #5B6A5F;
+  --line: #DDE6D6;
+  --on-dark: #FAFAF3;
+  --on-dark-muted: #C9D8C6;
+}
+
+/* Guaranteed Section Tones */
+.tone-cream {
+  background-color: var(--cream);
+  color: var(--ink);
+}
+
+.tone-white {
+  background-color: var(--white);
+  color: var(--ink);
+}
+
+.tone-mint {
+  background-color: var(--mint);
+  color: var(--ink);
+}
+
+.tone-dark {
+  background-color: var(--forest-deep) !important;
+  color: var(--on-dark) !important;
+}
+
+.tone-dark h1,
+.tone-dark h2,
+.tone-dark h3,
+.tone-dark h4,
+.tone-dark h5,
+.tone-dark h6 {
+  color: var(--on-dark) !important;
+}
+
+.tone-dark p.text-muted,
+.tone-dark span.text-muted,
+.tone-dark div.text-muted,
+.tone-dark .tone-muted {
+  color: var(--on-dark-muted) !important;
+}
+
+.tone-dark a {
+  color: var(--lime);
+}
+
+.tone-dark a:hover {
+  text-decoration: underline;
+}
+
+/* Guaranteed Robust Button Styles */
+.btn-primary {
+  background-color: var(--red) !important;
+  color: var(--white) !important;
+  height: 48px;
+  min-height: 48px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: background-color 150ms ease, transform 100ms ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--red-dark) !important;
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--cream), 0 0 0 4px var(--forest);
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  border: 1.5px solid var(--forest) !important;
+  color: var(--forest) !important;
+  height: 48px;
+  min-height: 48px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--mint) !important;
+}
+
+.btn-on-dark {
+  background-color: var(--on-dark) !important;
+  color: var(--forest-deep) !important;
+  height: 48px;
+  min-height: 48px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: background-color 150ms ease, opacity 150ms ease;
+}
+
+.btn-on-dark:hover:not(:disabled) {
+  background-color: var(--white) !important;
+  color: var(--forest-deep) !important;
+}
+
+.btn-disabled,
+button:disabled.btn-primary,
+button:disabled.btn-secondary,
+button:disabled.btn-on-dark {
+  background-color: var(--line) !important;
+  color: var(--muted) !important;
+  border-color: var(--line) !important;
+  cursor: not-allowed !important;
+  opacity: 0.65;
+}
+
+/* Recharts High-Contrast Text */
+.recharts-legend-item-text {
+  color: var(--ink) !important;
+}
+
+/* Step 3: Robust CSS Marquee */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+  animation-direction: var(--marquee-direction, normal);
+  will-change: transform;
+}
+
+.marquee:hover .marquee__track,
+.marquee[data-paused="true"] .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--marquee-gap, 48px);
+  padding-right: var(--marquee-gap, 48px);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Accessible Reduced-Motion: slows down to 2.5x rather than freezing completely */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation-duration: calc(var(--marquee-duration, 40s) * 2.5) !important;
+  }
+}

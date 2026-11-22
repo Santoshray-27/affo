@@ -108,7 +108,7 @@ export const BulkActionToolbar: React.FC<BulkActionToolbarProps> = ({
             <span className="text-white/30">|</span>
             <button
               onClick={onClearSelection}
-              className="text-[#DDE6D6]/70 hover:text-white transition-colors"
+              className="text-[#C9D8C6] hover:text-white transition-colors"
             >
               Deselect
             </button>

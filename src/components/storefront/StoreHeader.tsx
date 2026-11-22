@@ -19,6 +19,7 @@ import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 import { pricingConfig } from '../../config/pricing';
 import { Marquee } from '../ui/Marquee';
+import { BrandLogo } from '../common/BrandLogo';
 
 export const StoreHeader: React.FC = () => {
   const navigate = useNavigate();
@@ -105,8 +106,8 @@ export const StoreHeader: React.FC = () => {
     <>
       <header className="sticky top-0 z-40 bg-white border-b border-line">
         {/* 1. SLIM 36PX ANNOUNCEMENT MARQUEE */}
-        <div className="bg-forest-deep text-white text-[12px] h-9 flex items-center overflow-hidden">
-          <Marquee speed="slow" pauseOnHover={true} gap="gap-12" fadeEdges={false}>
+        <div className="bg-forest-deep text-on-dark text-[12px] h-9 flex items-center overflow-hidden">
+          <Marquee duration={30} pauseOnHover={true} gap="48px" fadeEdges={false} repeatCount={2}>
             <span className="flex items-center gap-12 font-medium tracking-wide">
               <span>Free delivery above ₹{pricingConfig.freeDeliveryThreshold}</span>
               <span className="text-white/30">•</span>
@@ -135,12 +136,8 @@ export const StoreHeader: React.FC = () => {
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
 
-              <Link to="/" className="flex items-center shrink-0">
-                <img
-                  src="/brand/logo-full.png"
-                  alt="Annapurna Farm Fresh & Organics"
-                  className="h-11 sm:h-12 w-auto object-contain"
-                />
+              <Link to="/" className="flex items-center shrink-0" aria-label="Annapurna Home">
+                <BrandLogo variant="header" />
               </Link>
             </div>
 

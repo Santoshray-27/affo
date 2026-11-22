@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { cn } from '../../lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'primary-red' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'tertiary';
+  variant?: 'primary' | 'primary-red' | 'secondary' | 'on-dark' | 'outline' | 'ghost' | 'danger' | 'tertiary';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
   isLoading?: boolean;
@@ -20,47 +20,61 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       icon,
       children,
       disabled,
+      style,
       ...props
     },
     ref
   ) => {
-    // 10px radius per design system rules, 48px default height on md
     const baseStyles =
-      'inline-flex items-center justify-center font-medium rounded-[10px] transition-colors duration-150 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.99]';
+      'inline-flex items-center justify-center font-semibold rounded-[10px] transition-all duration-150 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 active:scale-[0.99] disabled:pointer-events-none disabled:opacity-65';
 
-    const variants = {
-      // Primary button is brand red per spec (main CTA / buy / add)
-      primary:
-        'bg-red text-white hover:bg-red-hover focus-visible:ring-red font-semibold',
-      'primary-red':
-        'bg-red text-white hover:bg-red-hover focus-visible:ring-red font-semibold',
-      // Secondary: forest outline
-      secondary:
-        'border border-forest text-forest bg-transparent hover:bg-forest/5 font-semibold',
-      outline:
-        'border border-border text-ink bg-white hover:border-forest hover:text-forest',
-      ghost:
-        'text-ink hover:bg-mint/60 hover:text-forest',
+    // Guaranteed variant styles using token classes with fallback styles
+    const variantClasses = {
+      primary: 'btn-primary shadow-sm',
+      'primary-red': 'btn-primary shadow-sm',
+      secondary: 'btn-secondary',
+      'on-dark': 'btn-on-dark shadow-sm',
+      outline: 'bg-white border border-line text-ink hover:border-forest hover:text-forest',
+      ghost: 'bg-transparent text-ink hover:bg-mint hover:text-forest',
+      danger: 'bg-red text-white hover:bg-red-dark',
       tertiary:
-        'p-0 h-auto font-medium text-forest hover:text-forest-deep underline underline-offset-4 decoration-forest/40 hover:decoration-forest transition-all',
-      danger:
-        'bg-red/10 text-red hover:bg-red hover:text-white border border-red/20 focus-visible:ring-red',
+        'p-0 h-auto font-medium text-forest hover:text-forest-deep underline underline-offset-4 decoration-forest/40 hover:decoration-forest bg-transparent border-0',
+    };
+
+    // Specific inline style overrides for guaranteed rendering
+    const variantStyles: Record<string, React.CSSProperties> = {
+      primary: { backgroundColor: '#D62828', color: '#FFFFFF' },
+      'primary-red': { backgroundColor: '#D62828', color: '#FFFFFF' },
+      secondary: { backgroundColor: 'transparent', borderColor: '#14612A', color: '#14612A' },
+      'on-dark': { backgroundColor: '#FAFAF3', color: '#0B3D1A' },
+      outline: { backgroundColor: '#FFFFFF', borderColor: '#DDE6D6', color: '#1F2A22' },
+      ghost: { backgroundColor: 'transparent' },
+      danger: { backgroundColor: '#D62828', color: '#FFFFFF' },
+      tertiary: {},
     };
 
     const sizes = {
-      sm: 'text-xs px-3.5 py-1.5 gap-1.5 h-9',
-      md: 'text-sm px-5 py-2.5 gap-2 h-12', // 48px standard
-      lg: 'text-base px-6 py-3 gap-2.5 h-13',
+      sm: 'text-xs px-3.5 h-9 min-h-[36px] gap-1.5',
+      md: 'text-sm px-5 h-12 min-h-[48px] gap-2', // 48px standard height
+      lg: 'text-base px-6 h-13 min-h-[52px] gap-2.5',
     };
+
+    const isCustomHeight = className?.includes('h-') || className?.includes('py-');
 
     return (
       <button
         ref={ref}
         disabled={disabled || isLoading}
+        style={{
+          ...variantStyles[variant],
+          ...(disabled ? { backgroundColor: '#DDE6D6', color: '#5B6A5F', borderColor: '#DDE6D6' } : {}),
+          ...style,
+        }}
         className={cn(
           baseStyles,
-          variants[variant],
-          variant !== 'tertiary' && sizes[size],
+          variantClasses[variant],
+          variant !== 'tertiary' && !isCustomHeight && sizes[size],
+          disabled && 'btn-disabled cursor-not-allowed',
           fullWidth && 'w-full',
           className
         )}
@@ -78,3 +92,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
+export default Button;

@@ -10,12 +10,12 @@ import { PageTransition } from '../common/PageTransition';
 
 export const StorefrontLayout: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-cream text-app-text selection:bg-mint-dark selection:text-primary-dark">
+    <div className="min-h-screen flex flex-col bg-cream text-ink selection:bg-mint selection:text-forest">
       <TopProgressBar />
 
       <StoreHeader />
 
-      <main className="flex-1 flex flex-col">
+      <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col focus:outline-none">
         <PageTransition>
           <Outlet />
         </PageTransition>

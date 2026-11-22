@@ -201,12 +201,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, layout = 'gri
                   size="sm"
                 />
               ) : (
-                <button
+                <Button
+                  variant="primary"
+                  size="sm"
                   onClick={handleAddToCart}
-                  className="px-2.5 py-1 bg-red hover:bg-red-hover text-white rounded-[6px] text-xs font-medium transition-colors"
+                  className="px-2.5 h-7 text-xs"
                 >
                   Add
-                </button>
+                </Button>
               )}
             </div>
           </div>
