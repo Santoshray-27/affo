@@ -313,9 +313,8 @@ export const CheckoutPage: React.FC = () => {
 
             <div className="space-y-3">
               {deliverySlots.map((slot) => (
-                <div
+                <label
                   key={slot.id}
-                  onClick={() => setDeliverySlot(slot.id)}
                   className={`p-4 rounded-[10px] border text-xs cursor-pointer transition-colors flex items-start gap-3 ${
                     selectedDeliverySlot === slot.id
                       ? 'border-forest bg-cream'
@@ -325,6 +324,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="radio"
                     name="deliverySlot"
+                    aria-label={slot.title}
                     checked={selectedDeliverySlot === slot.id}
                     onChange={() => setDeliverySlot(slot.id)}
                     className="mt-0.5 accent-forest"
@@ -333,7 +333,7 @@ export const CheckoutPage: React.FC = () => {
                     <span className="font-semibold text-ink block">{slot.title}</span>
                     <p className="text-muted mt-0.5">{slot.subtitle}</p>
                   </div>
-                </div>
+                </label>
               ))}
             </div>
           </section>
@@ -351,7 +351,7 @@ export const CheckoutPage: React.FC = () => {
 
             {/* Wallet Toggle Option */}
             {currentCustomer.walletBalance > 0 && (
-              <div className="p-3.5 rounded-[10px] bg-cream border border-line flex items-center justify-between text-xs">
+              <label className="p-3.5 rounded-[10px] bg-cream border border-line flex items-center justify-between text-xs cursor-pointer">
                 <div className="flex items-center gap-3">
                   <Wallet className="w-4 h-4 text-forest shrink-0" />
                   <div>
@@ -367,18 +367,18 @@ export const CheckoutPage: React.FC = () => {
                 </div>
                 <input
                   type="checkbox"
+                  aria-label="Use Annapurna Wallet balance"
                   checked={useWalletBalance}
                   onChange={(e) => setUseWalletBalance(e.target.checked)}
                   className="w-4 h-4 rounded text-forest accent-forest cursor-pointer"
                 />
-              </div>
+              </label>
             )}
 
             {/* Vertical List of Radio Rows per Section 6 */}
             <div className="space-y-2.5">
               {/* UPI */}
-              <div
-                onClick={() => setPaymentMethod('upi')}
+              <label
                 className={`p-3.5 rounded-[10px] border text-xs cursor-pointer transition-colors flex items-center justify-between ${
                   paymentMethod === 'upi'
                     ? 'border-forest bg-cream'
@@ -389,6 +389,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="radio"
                     name="paymentMethod"
+                    aria-label="UPI (Google Pay, PhonePe, Paytm)"
                     checked={paymentMethod === 'upi'}
                     onChange={() => setPaymentMethod('upi')}
                     className="accent-forest"
@@ -399,11 +400,10 @@ export const CheckoutPage: React.FC = () => {
                     <span className="text-[11px] text-muted ml-2">Google Pay, PhonePe, Paytm</span>
                   </div>
                 </div>
-              </div>
+              </label>
 
               {/* Card / Netbanking */}
-              <div
-                onClick={() => setPaymentMethod('card_netbanking')}
+              <label
                 className={`p-3.5 rounded-[10px] border text-xs cursor-pointer transition-colors flex items-center justify-between ${
                   paymentMethod === 'card_netbanking'
                     ? 'border-forest bg-cream'
@@ -414,6 +414,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="radio"
                     name="paymentMethod"
+                    aria-label="Credit / Debit Card or NetBanking"
                     checked={paymentMethod === 'card_netbanking'}
                     onChange={() => setPaymentMethod('card_netbanking')}
                     className="accent-forest"
@@ -424,11 +425,10 @@ export const CheckoutPage: React.FC = () => {
                     <span className="text-[11px] text-muted ml-2">All major Indian banks</span>
                   </div>
                 </div>
-              </div>
+              </label>
 
               {/* Cash on Delivery */}
-              <div
-                onClick={() => setPaymentMethod('cod')}
+              <label
                 className={`p-3.5 rounded-[10px] border text-xs cursor-pointer transition-colors flex items-center justify-between ${
                   paymentMethod === 'cod'
                     ? 'border-forest bg-cream'
@@ -439,6 +439,7 @@ export const CheckoutPage: React.FC = () => {
                   <input
                     type="radio"
                     name="paymentMethod"
+                    aria-label="Cash on Delivery"
                     checked={paymentMethod === 'cod'}
                     onChange={() => setPaymentMethod('cod')}
                     className="accent-forest"
@@ -449,7 +450,7 @@ export const CheckoutPage: React.FC = () => {
                     <span className="text-[11px] text-muted ml-2">Pay upon morning arrival</span>
                   </div>
                 </div>
-              </div>
+              </label>
             </div>
 
             {/* UPI ID input if UPI selected */}

@@ -20,7 +20,9 @@ test.describe('Phase 2: Customer Storefront Functional Workflows', () => {
 
     // 2. Return home and test Newsletter
     await page.goto('/');
+    await page.locator('main').waitFor({ state: 'visible' });
     const emailInput = page.getByPlaceholder(/Enter your email/i);
+    await emailInput.scrollIntoViewIfNeeded();
     await expect(emailInput).toBeVisible();
 
     const subscribeBtn = page.getByRole('button', { name: /Subscribe|Join/i });
@@ -154,7 +156,7 @@ test.describe('Phase 2: Customer Storefront Functional Workflows', () => {
     // 3. Profile
     await page.goto('/profile');
     await page.locator('main').waitFor({ state: 'visible' });
-    await expect(page.locator('h1')).toContainText('Account Profile');
+    await expect(page.locator('h1')).toContainText('Profile & Delivery Addresses');
 
     const nameInput = page.getByLabel(/Full Name/i);
     await nameInput.fill('Demo Customer Updated');

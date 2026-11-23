@@ -150,6 +150,7 @@ export const ShopPage: React.FC = () => {
             <Search className="w-4 h-4 text-muted absolute left-3.5 top-3 pointer-events-none" />
             <input
               type="text"
+              aria-label="Search produce"
               value={queryParam}
               onChange={(e) => updateParam('q', e.target.value)}
               placeholder="Search produce..."
@@ -278,6 +279,7 @@ export const ShopPage: React.FC = () => {
                   </div>
                   <input
                     type="range"
+                    aria-label="Maximum price filter"
                     min="30"
                     max="1000"
                     step="20"
@@ -311,6 +313,7 @@ export const ShopPage: React.FC = () => {
               </Button>
 
               <select
+                aria-label="Sort produce"
                 value={sortParam}
                 onChange={(e) => updateParam('sort', e.target.value)}
                 className="bg-white border border-line text-xs rounded-[10px] px-3 py-2 font-medium text-ink focus:outline-none focus:border-forest cursor-pointer"
@@ -461,6 +464,7 @@ export const ShopPage: React.FC = () => {
             </div>
             <input
               type="range"
+              aria-label="Maximum price filter"
               min="30"
               max="1000"
               step="20"

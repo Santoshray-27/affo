@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5173",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "check:contrast": "node scripts/check-contrast.mjs"
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "test:e2e": "playwright test",
+    "check:all": "tsc && vite build && node scripts/check-contrast.mjs && playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

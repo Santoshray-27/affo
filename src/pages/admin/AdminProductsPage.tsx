@@ -188,6 +188,7 @@ export const AdminProductsPage: React.FC = () => {
           <Search className="w-3.5 h-3.5 text-muted absolute left-3.5 top-3 pointer-events-none" />
           <input
             type="text"
+            aria-label="Search produce name"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
@@ -201,6 +202,7 @@ export const AdminProductsPage: React.FC = () => {
         {/* Category & Status Selectors */}
         <div className="flex flex-wrap items-center gap-2">
           <select
+            aria-label="Filter by category"
             value={selectedCategory}
             onChange={(e) => {
               setSelectedCategory(e.target.value);
@@ -217,6 +219,7 @@ export const AdminProductsPage: React.FC = () => {
           </select>
 
           <select
+            aria-label="Filter by status"
             value={statusFilter}
             onChange={(e) => {
               setStatusFilter(e.target.value as any);
@@ -242,6 +245,7 @@ export const AdminProductsPage: React.FC = () => {
                 <th className="p-3.5 w-10">
                   <input
                     type="checkbox"
+                    aria-label="Select all produce items"
                     checked={
                       filteredProducts.length > 0 &&
                       selectedIds.length === filteredProducts.length
@@ -304,6 +308,7 @@ export const AdminProductsPage: React.FC = () => {
                       <td className="p-3.5">
                         <input
                           type="checkbox"
+                          aria-label={`Select ${p.name}`}
                           checked={isSelected}
                           onChange={() => handleToggleSelect(p.id)}
                           className="w-4 h-4 rounded text-forest accent-forest cursor-pointer"
@@ -368,6 +373,7 @@ export const AdminProductsPage: React.FC = () => {
                             onClick={() => navigate(`/admin/products/${p.id}/edit`)}
                             className="p-1.5 rounded-[6px] text-muted hover:text-forest hover:bg-cream transition-colors"
                             title="Edit Produce"
+                            aria-label={`Edit ${p.name}`}
                           >
                             <Edit2 className="w-3.5 h-3.5" />
                           </button>
@@ -375,6 +381,7 @@ export const AdminProductsPage: React.FC = () => {
                             onClick={() => setDeleteTargetProduct(p)}
                             className="p-1.5 rounded-[6px] text-muted hover:text-red hover:bg-red/10 transition-colors"
                             title="Delete Produce"
+                            aria-label={`Delete ${p.name}`}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -400,6 +407,7 @@ export const AdminProductsPage: React.FC = () => {
             <Button
               variant="outline"
               size="sm"
+              aria-label="Previous page"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               className="h-7 px-2"
@@ -412,6 +420,7 @@ export const AdminProductsPage: React.FC = () => {
             <Button
               variant="outline"
               size="sm"
+              aria-label="Next page"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               className="h-7 px-2"

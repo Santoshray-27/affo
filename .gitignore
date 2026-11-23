@@ -33,3 +33,9 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Testing
+playwright-report
+test-results
+blob-report
+
