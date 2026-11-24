@@ -44,9 +44,7 @@ const SuspenseLoader: React.FC = () => (
 );
 
 export const App: React.FC = () => {
-  const [loading, setLoading] = useState(
-    () => !sessionStorage.getItem('annapurna_loaded')
-  );
+  const [loading, setLoading] = useState(true);
 
   return (
     <>
@@ -54,7 +52,6 @@ export const App: React.FC = () => {
         {loading && (
           <Preloader
             onDone={() => {
-              sessionStorage.setItem('annapurna_loaded', '1');
               setLoading(false);
             }}
           />

@@ -7,12 +7,12 @@ const W = 1200;          // SVG viewBox width
 const H = 340;           // SVG viewBox height
 const AMP = 14;          // wave height
 const LEN = 480;         // wave length (one period)
-const MIN_MS = 1800;     // minimum display time
+const MIN_MS = 2000;     // minimum display time
 const MAX_MS = 3500;     // maximum display time
 
 const THEMES = {
-  dark:  { bg: "#0B3D1A", dim: "rgba(255,255,255,0.12)", fill: "#FAFAF3", accent: "#FF4D4D", label: "rgba(250,250,243,0.85)" },
-  light: { bg: "#FAFAF3", dim: "#DDE6D6",               fill: "#14612A", accent: "#D62828", label: "rgba(31,42,34,0.8)" },
+  dark: { bg: "#0B3D1A", dim: "rgba(255,255,255,0.12)", fill: "#FAFAF3", accent: "#FF4D4D", label: "rgba(250,250,243,0.85)" },
+  light: { bg: "#FAFAF3", dim: "#DDE6D6", fill: "#14612A", accent: "#D62828", label: "rgba(31,42,34,0.8)" },
 };
 
 function buildWave(): string {
@@ -29,6 +29,7 @@ const WAVE_PATH = buildWave();
 export function Preloader({ onDone, theme = "dark" }: PreloaderProps) {
   const c = THEMES[theme];
   const [progress, setProgress] = useState(0);
+  const [stage, setStage] = useState<'initial' | 'assembled'>('initial');
   const progressRef = useRef(0);
   const waveRef = useRef<SVGGElement>(null);
   progressRef.current = progress;
@@ -42,6 +43,18 @@ export function Preloader({ onDone, theme = "dark" }: PreloaderProps) {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = prev; };
   }, []);
+
+  // Animation sequence: Hindi letter centered first, then slides left and 'nnapurna' appears
+  useEffect(() => {
+    if (reduce) {
+      setStage('assembled');
+      return;
+    }
+    const timer = setTimeout(() => {
+      setStage('assembled');
+    }, 550);
+    return () => clearTimeout(timer);
+  }, [reduce]);
 
   // progress: real readiness + eased timer
   useEffect(() => {
@@ -97,20 +110,49 @@ export function Preloader({ onDone, theme = "dark" }: PreloaderProps) {
 
   const pct = Math.min(100, Math.round(progress));
 
-  const textProps = {
-    x: W / 2,
-    y: H * 0.78,
-    textAnchor: "middle" as const,
-    fontSize: 230,
-    fontWeight: 900,
-    style: { fontFamily: "'Fraunces', serif" },
-  };
-
   const Wordmark = ({ fill }: { fill: string }) => (
-    <text {...textProps} fill={fill}>
-      <tspan fill={fill === c.fill ? c.accent : fill} style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}>अ</tspan>
-      nnapurna
-    </text>
+    <g>
+      {/* 1. Red Hindi letter 'अ': centered initially, then glides to left */}
+      <g
+        style={{
+          transform: stage === "initial" ? "translateX(482px)" : "translateX(0px)",
+          transition: "transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        <text
+          x={21}
+          y={H * 0.78}
+          textAnchor="start"
+          fontSize={230}
+          fontWeight={900}
+          fill={c.accent}
+          style={{ fontFamily: "'Tiro Devanagari Hindi', serif" }}
+        >
+          अ
+        </text>
+      </g>
+
+      {/* 2. English letters 'nnapurna': smoothly slides out from behind 'अ' */}
+      <g
+        clipPath="url(#annapurna-reveal)"
+        style={{
+          transform: stage === "initial" ? "translateX(-120px)" : "translateX(0px)",
+          transition: "transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        <text
+          x={214.8}
+          y={H * 0.78}
+          textAnchor="start"
+          fontSize={230}
+          fontWeight={900}
+          fill={fill}
+          style={{ fontFamily: "'Fraunces', serif" }}
+        >
+          nnapurna
+        </text>
+      </g>
+    </g>
   );
 
   return (
@@ -132,6 +174,18 @@ export function Preloader({ onDone, theme = "dark" }: PreloaderProps) {
               <g ref={waveRef} transform={`translate(0, ${H + AMP})`}>
                 <path d={WAVE_PATH} />
               </g>
+            </clipPath>
+            {/* Smooth slide-out reveal mask synchronized with Hindi letter */}
+            <clipPath id="annapurna-reveal">
+              <rect
+                x="214"
+                y="0"
+                width={stage === "initial" ? "0" : "1000"}
+                height={H * 2}
+                style={{
+                  transition: "width 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+              />
             </clipPath>
           </defs>
 

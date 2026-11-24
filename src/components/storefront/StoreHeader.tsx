@@ -59,9 +59,10 @@ export const StoreHeader: React.FC = () => {
     }
   }, [isSearchExpanded]);
 
-  // Close mobile drawer on route change
+  // Close mobile drawer and cart drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setIsCartOpen(false);
   }, [location.pathname]);
 
   const searchSuggestions = searchQuery.trim()

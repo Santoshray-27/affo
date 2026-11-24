@@ -22,6 +22,15 @@
     --marigold: #F5A524;
     --app-text: #1F2A22;
     --border: #DDE6D6;
+
+    /* Conveyor & UI components support */
+    --color-background: #FAFAF3;
+    --color-foreground: #1F2A22;
+    --color-muted-foreground: #6B7A6F;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -33,7 +42,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6, .font-heading {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-heading {
     font-family: 'Fraunces', serif;
     font-optical-sizing: auto;
     letter-spacing: -0.02em;
@@ -67,6 +82,7 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
